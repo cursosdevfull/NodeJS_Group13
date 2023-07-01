@@ -1,26 +1,41 @@
 import { Address } from "../entities/address";
 import { Disease } from "../entities/disease";
 import { Specialty } from "../entities/specialty";
+import { MedicFactory } from "./medic.factory";
 
 type GENDER = "M" | "F";
 
-interface Props {
-  id: string;
-  name: string;
-  lastname: string;
-  dni: string;
-  email: string;
-  phone: string;
-  gender: GENDER;
-  address: Address[];
-  nationality: string;
-  cmp: string;
-  specialty: Specialty;
-  diseases: Disease[];
-  age: number;
+export interface MedicEssentials {
+  readonly id: string;
+  readonly name: string;
+  readonly lastname: string;
+  readonly dni: string;
+  readonly email: string;
+  readonly cmp: string;
 }
 
-class Medic {
+export interface MedicOptionals {
+  readonly phone: string;
+  readonly gender: GENDER;
+  readonly address: Address[];
+  readonly nationality: string;
+  readonly specialty: Specialty;
+  readonly diseases: Disease[];
+  readonly age: number;
+  readonly active: boolean;
+  readonly createdAt: Date;
+  readonly updatedAt: Date | null;
+  readonly deletedAt: Date | null;
+}
+
+export type MedicUpdate = Partial<
+  Omit<MedicEssentials, "id" | "email"> &
+    Omit<MedicOptionals, "createdAt" | "deletedAt" | "updatedAt" | "active">
+>;
+
+export type MedicProperties = MedicEssentials & Partial<MedicOptionals>;
+
+export class Medic {
   private readonly id: string;
   private name: string;
   private lastname: string;
@@ -34,41 +49,59 @@ class Medic {
   private specialty: Specialty;
   private diseases: Disease[];
   private age: number;
+  private active: boolean;
+  private readonly createdAt: Date;
+  private updatedAt: Date | null;
+  private deletedAt: Date | null;
 
-  constructor(props: Props) {
-    if (props.age < 18) throw new Error("El médico debe ser mayor de edad");
-    if (props.age > 80) throw new Error("El médico debe ser menor de 80 años");
-
-    if (props.dni.length !== 8) throw new Error("El DNI debe tener 8 dígitos");
-
-    if (props.phone.length !== 9)
-      throw new Error("El teléfono debe tener 9 dígitos");
-
-    if (props.cmp.length !== 5) throw new Error("El CMP debe tener 5 dígitos");
-
-    if (props.address.length === 0)
-      throw new Error("El médico debe tener al menos una dirección");
-    if (props.address.length > 3)
-      throw new Error("El médico no puede tener más de 3 direcciones");
-
+  constructor(props: MedicProperties) {
     Object.assign(this, props);
-    /*this.id = props.id;
-    this.name = props.name;
-    this.lastname = props.lastname;
-    this.dni = props.dni;
-    this.email = props.email;
-    this.phone = props.phone;
-    this.address = props.address;
-    this.nationality = props.nationality;
-    this.cmp = props.cmp;
-    this.specialty = props.specialty;
-    this.diseases = props.diseases;
-    this.age = props.age;
-    this.gender = props.gender;*/
+    this.active = true;
+    this.createdAt = new Date();
+  }
+
+  update(props: MedicUpdate) {
+    if (!this.active) return;
+    Object.assign(this, props);
+    this.updatedAt = new Date();
+  }
+
+  delete() {
+    this.active = false;
+    this.deletedAt = new Date();
+  }
+
+  properties(): MedicProperties {
+    return Object.assign(
+      {},
+      {
+        id: this.id,
+        name: this.name,
+        lastname: this.lastname,
+        dni: this.dni,
+        email: this.email,
+        phone: this.phone,
+        address: this.address,
+        cmp: this.cmp,
+        gender: this.gender,
+        nationality: this.nationality,
+        specialty: this.specialty,
+        diseases: this.diseases,
+        age: this.age,
+        active: this.active,
+        createdAt: this.createdAt,
+        updatedAt: this.updatedAt,
+        deletedAt: this.deletedAt,
+      }
+    );
+  }
+
+  static reconstitute(props: MedicProperties) {
+    return MedicFactory.create(props);
   }
 }
 
-const props: Props = {
+/*const props: Props = {
   id: "6b17223b-eb8e-400e-9959-55e0a4e33355",
   name: "Juan",
   lastname: "Pérez",
@@ -97,4 +130,4 @@ const props: Props = {
 
 const medic = new Medic(props);
 
-console.log(medic);
+console.log(medic);*/

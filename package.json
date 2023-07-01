@@ -16,5 +16,12 @@
   "bugs": {
     "url": "https://github.com/cursosdevfull/NodeJS_Group13/issues"
   },
-  "homepage": "https://github.com/cursosdevfull/NodeJS_Group13#readme"
+  "homepage": "https://github.com/cursosdevfull/NodeJS_Group13#readme",
+  "devDependencies": {
+    "@types/uuid": "^9.0.2",
+    "uuid": "9.0.0"
+  },
+  "dependencies": {
+    "neverthrow": "^6.0.0"
+  }
 }
