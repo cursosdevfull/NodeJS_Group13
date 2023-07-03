@@ -8,6 +8,8 @@
     "noImplicitAny": true,
     "resolveJsonModule": true,
     "baseUrl": "./",
-    "outDir": "./cache"
+    "outDir": "./cache",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true
   }
 }
