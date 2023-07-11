@@ -21,4 +21,8 @@ export class MedicApplication {
       return saveResult;
     }
   }
+
+  getAll() {
+    return this.repository.getAll();
+  }
 }

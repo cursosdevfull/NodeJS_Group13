@@ -1,22 +1,24 @@
 import "reflect-metadata";
 
+import { Request, Response } from "express";
 import { v4 as uuidv4 } from "uuid";
 
 import { MedicApplication } from "../application/medic.application";
 import { Disease } from "../domain/entities/disease";
-import { MedicRepository } from "../domain/repositories/medic.repository";
 import { MedicProperties } from "../domain/roots/medic";
-import { MedicInfrastructure } from "../infrastructure/medic.infrastructure";
 import { MedicCreateResponse } from "./dtos/responses/medic-create.dto";
+import { MedicGetAllResponse } from "./dtos/responses/medic-get-all.dto";
 
 export class MedicController {
   private application: MedicApplication;
 
   constructor(app: MedicApplication) {
     this.application = app;
+    //this.getAll = this.getAll.bind(this);
   }
 
-  insert() {
+  insert(req: Request, res: Response) {
+    console.log("body", req.body);
     const props: MedicProperties = {
       id: uuidv4(),
       name: "Juan",
@@ -48,11 +50,16 @@ export class MedicController {
     if (result.isErr()) {
       console.log(result.error.name, result.error.message);
     } else {
-      return MedicCreateResponse.fromDomainToResponse(result.value);
+      res.json(MedicCreateResponse.fromDomainToResponse(result.value));
+    }
+  }
+
+  getAll(req: Request, res: Response) {
+    const result = this.application.getAll();
+    if (result.isErr()) {
+      console.log(result.error.name, result.error.message);
+    } else {
+      res.json(MedicGetAllResponse.fromDomainToResponse(result.value));
     }
   }
 }
-const infrastructure: MedicRepository = new MedicInfrastructure();
-const application = new MedicApplication(infrastructure);
-const controller = new MedicController(application);
-console.log(controller.insert());

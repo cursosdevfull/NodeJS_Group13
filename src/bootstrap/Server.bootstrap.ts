@@ -1,49 +1,24 @@
+import { Application } from "express";
 import http from "http";
 
-import app from "../app";
+import { Bootstrap } from "./bootstrap";
 
-export class ServerBootstrap {
-  constructor() {}
+export default class implements Bootstrap {
+  constructor(private readonly app: Application) {}
 
-  initialize() {
+  initialize(): Promise<boolean | Error> {
     return new Promise((resolve, reject) => {
-      const server = http.createServer(app);
+      const server = http.createServer(this.app);
 
       server
         .listen(3000)
         .on("listening", () => {
-          console.log("Server running...");
-          resolve("Finally promise resolved");
+          console.log(`Server is running on port ${3000}`);
+          resolve(true);
         })
-        .on("error", (error: NodeJS.ErrnoException) => {
-          //console.log(error.message);
+        .on("error", (error: Error) => {
           reject(error);
         });
     });
-
-    /* promise.then(
-      (messageReturned: string) => {
-        console.log(messageReturned);
-      },
-      (messageErrorReturned: NodeJS.ErrnoException) => {
-        console.log(messageErrorReturned);
-      }
-    );*/
-
-    /*promise
-      .then((messageReturned: string) => {
-        console.log(messageReturned);
-      })
-      .catch((messageErrorReturned: NodeJS.ErrnoException) => {
-        console.log(messageErrorReturned);
-      });*/
-
-    /*promise.then((messageReturned: string) => {
-      console.log(messageReturned);
-    });
-
-    promise.catch((messageErrorReturned: NodeJS.ErrnoException) => {
-      console.log(messageErrorReturned);
-    });*/
   }
 }

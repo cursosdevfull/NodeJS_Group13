@@ -1,0 +1,27 @@
+post http://localhost:3000/medic HTTP/1.1
+content-type: application/json
+
+{
+    "id": "091d4bbf-f9e4-457d-b77a-25291c242e1c",
+    "nombre": "Juan",
+    "apellido": "Pérez",
+    "dni": "12345678",
+    "correo": "juan.perez@correo.com",
+    "telefono": "987654321",
+    "direccion": [{
+        "direccion": "Av. Los Olivos 123",
+        "distrito": "Los Olivos",
+        "provincia": "Lima",
+        "departamento": "Lima"
+    }],
+    "nacionalidad": "Peruvian",
+    "cmp": "12345",
+    "especialidad": {
+        "id": "6b17223b-eb8e-400e-9959-55e0a4e33355",
+        "nombre": "Cardiología",
+        "description": "Especialidad que estudia el corazón"
+    },
+    "enfermedades": ["Diabetes"],
+    "edad": 30,
+    "sexo": "M"
+}
