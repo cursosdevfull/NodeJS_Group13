@@ -12,7 +12,7 @@ import { Disease } from "../../../domain/entities/disease";
 import { Specialty } from "../../../domain/entities/specialty";
 import { GENDER, Medic } from "../../../domain/roots/medic";
 
-export class MedicGetAllDto {
+export class MedicGotAllDto {
   @Expose({ name: "id" })
   medicId: string;
 
@@ -63,8 +63,8 @@ export class MedicGetAllDto {
 export class StandardResponse {
   traceId: string;
 
-  @Type(() => MedicGetAllDto)
-  result: MedicGetAllDto[];
+  @Type(() => MedicGotAllDto)
+  result: MedicGotAllDto[];
 
   constructor() {
     this.traceId = uuidv4();
@@ -75,7 +75,7 @@ export class MedicGetAllResponse {
   static fromDomainToResponse(medics: Medic[]) {
     const listMedic = medics.map((medic) => {
       const properties = medic.properties();
-      return plainToInstance(MedicGetAllDto, { ...properties });
+      return plainToInstance(MedicGotAllDto, { ...properties });
     });
 
     const result = instanceToPlain(listMedic);

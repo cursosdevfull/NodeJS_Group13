@@ -6,7 +6,7 @@ import { Disease } from "../../../domain/entities/disease";
 import { Specialty } from "../../../domain/entities/specialty";
 import { GENDER, Medic } from "../../../domain/roots/medic";
 
-export class MedicCreateDto {
+export class MedicCreatedDto {
   @Expose({ name: "id" })
   medicId: string;
 
@@ -57,8 +57,8 @@ export class MedicCreateDto {
 export class StandardResponse {
   traceId: string;
 
-  @Type(() => MedicCreateDto)
-  result: MedicCreateDto;
+  @Type(() => MedicCreatedDto)
+  result: MedicCreatedDto;
 
   constructor() {
     this.traceId = uuidv4();

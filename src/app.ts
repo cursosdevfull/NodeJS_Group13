@@ -1,5 +1,6 @@
 import express, { Application } from "express";
 
+import { HandlerErrors } from "./core/helpers/errors";
 import MedicRouter from "./modules/medic/presentation/medic.routes";
 
 class App {
@@ -7,8 +8,28 @@ class App {
 
   constructor() {
     this.app = express();
+    this.mountHealthCheck();
     this.mountMiddlewares();
     this.mountRoutes();
+    this.mountHandlerErrors();
+  }
+
+  mountHealthCheck(): void {
+    this.app.get("/", (req, res) => {
+      res.send("ok");
+    });
+
+    this.app.get("/health", (req, res) => {
+      res.send("ok");
+    });
+
+    this.app.get("/healthz", (req, res) => {
+      res.send("ok");
+    });
+
+    this.app.get("/healthcheck", (req, res) => {
+      res.send("ok");
+    });
   }
 
   mountMiddlewares(): void {
@@ -18,6 +39,11 @@ class App {
 
   mountRoutes(): void {
     this.app.use("/medic", MedicRouter);
+  }
+
+  mountHandlerErrors(): void {
+    this.app.use(HandlerErrors.notFound);
+    this.app.use(HandlerErrors.generic);
   }
 
   getApp(): Application {
