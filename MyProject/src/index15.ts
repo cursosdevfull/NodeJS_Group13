@@ -1,5 +1,3 @@
-import { Brackets } from "typeorm";
-
 import { AppDataSource } from "./data-source";
 import { User } from "./entity/User";
 
@@ -11,17 +9,8 @@ AppDataSource.initialize()
       .createQueryBuilder()
       .from(User, "user")
       .select(["user.id", "user.name", "user.lastname"])
-      .where("user.age>=:minAge")
-      .andWhere("user.age<=:maxAge")
-      .andWhere(
-        new Brackets((qb) => {
-          qb.where("user.name like :name", { name: "%Elon%" }).orWhere(
-            "user.lastname=:lastname",
-            { lastname: "Pérez" }
-          );
-        })
-      )
-      .setParameters({ minAge: 20, maxAge: 40 })
+      .where("user.age between :minAge and :maxAge")
+      .setParameters({ minAge: 20, maxAge: 35 })
       .getRawMany();
 
     console.log("users", users);
