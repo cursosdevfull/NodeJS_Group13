@@ -12,13 +12,13 @@ export class User {
   public name: string;
 
   @Column({ length: 50 })
-  private lastname: string;
+  lastname: string;
 
   @Column({ length: 100 })
   public email: string;
 
   @Column({ type: "int" })
-  private age: number;
+  age: number;
 
   @Column({ type: "boolean" })
   private isActive: boolean;

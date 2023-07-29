@@ -1,29 +1,44 @@
-import { Brackets } from "typeorm";
-
 import { AppDataSource } from "./data-source";
+import { CarEntity } from "./entity/Car";
 import { User } from "./entity/User";
 
 AppDataSource.initialize()
   .then(async () => {
-    const manager = AppDataSource.manager;
-
-    const users = await manager
+    const report = await AppDataSource.manager
       .createQueryBuilder()
-      .from(User, "user")
-      .select(["user.id", "user.name", "user.lastname"])
-      .where("user.age>=:minAge")
-      .andWhere("user.age<=:maxAge")
-      .andWhere(
-        new Brackets((qb) => {
-          qb.where("user.name like :name", { name: "%Elon%" }).orWhere(
-            "user.lastname=:lastname",
-            { lastname: "Pérez" }
-          );
-        })
-      )
-      .setParameters({ minAge: 20, maxAge: 40 })
+      .from(CarEntity, "car")
+      .select([
+        "car.id",
+        "car.brand",
+        "car.model",
+        "car.year",
+        "car.color",
+        "user.name",
+        "user.email",
+        "user.age",
+      ])
+      .leftJoin("car.users", "user")
       .getRawMany();
 
-    console.log("users", users);
+    //console.log(report);
+
+    const reportUsers = await AppDataSource.manager
+      .createQueryBuilder()
+      .from(User, "user")
+      .select([
+        "user.id",
+        "user.name",
+        "user.lastname",
+        "user.email",
+        "user.age",
+        "car.brand",
+        "car.model",
+        "car.year",
+        "car.color",
+      ])
+      .leftJoin("user.cars", "car")
+      .getRawMany();
+
+    console.log(reportUsers);
   })
   .catch((error) => console.log(error));
