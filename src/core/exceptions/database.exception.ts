@@ -1,7 +1,4 @@
-import {
-  ExceptionBase,
-  ExceptionCode,
-} from "../../../../core/exceptions/exception-base";
+import { ExceptionBase, ExceptionCode } from "./exception-base";
 
 export class DatabaseException extends ExceptionBase {
   constructor(message: string) {

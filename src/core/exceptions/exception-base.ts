@@ -1,5 +1,3 @@
-import { MedicAddressEmptyException } from "../../modules/medic/domain/exceptions/address.exception";
-
 export enum ExceptionCode {
   Default = "DEFAULT_EXCEPTION",
 
@@ -11,6 +9,8 @@ export enum ExceptionCode {
   MedicAddressEmptyException = "MEDIC_ADDRESS_EMPTY_EXCEPTION",
   MedicAddressMaximumException = "MEDIC_ADDRESS_MAXIMUM_EXCEPTION",
   UUIDException = "UUID_EXCEPTION",
+  UserNameInvalidLengthException = "USER_NAME_INVALID_LENGTH_EXCEPTION",
+  UserEmailInvalidException = "USER_EMAIL_INVALID_EXCEPTION",
 
   // Infrastructure
   DatabaseMedicException = "DATABASE_MEDIC_EXCEPTION",

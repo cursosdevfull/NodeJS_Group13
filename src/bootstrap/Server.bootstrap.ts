@@ -22,4 +22,8 @@ export default class implements Bootstrap {
         });
     });
   }
+
+  close() {
+    process.exit(1);
+  }
 }

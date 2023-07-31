@@ -1,9 +1,9 @@
 import { ok, Result } from "neverthrow";
 
+import { DatabaseException } from "../../../core/exceptions/database.exception";
 import { MedicRepository } from "../domain/repositories/medic.repository";
 import { Medic } from "../domain/roots/medic";
 import { MedicGetAllDto } from "./dtos/get-all.dto";
-import { DatabaseException } from "./exceptions/database.exception";
 
 export type MedicSaveResult = Result<Medic, DatabaseException>;
 export type MedicGetAllResult = Result<Medic[], Error>;
