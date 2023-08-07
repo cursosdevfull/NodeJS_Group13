@@ -1,6 +1,10 @@
+import cors from "cors";
 import express, { Application } from "express";
+import helmet from "helmet";
 
+import RedisBootstrap from "./bootstrap/Redis.bootstrap";
 import { HandlerErrors } from "./core/helpers/errors";
+import { AuthenticationMiddleware } from "./core/presentation/middlewares/authentication";
 import MedicRouter from "./modules/medic/presentation/medic.routes";
 import UserRouter from "./modules/user/presentation/user.routes";
 
@@ -34,13 +38,16 @@ class App {
   }
 
   mountMiddlewares(): void {
+    this.app.use(cors());
+    this.app.use(helmet());
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: true }));
   }
 
   mountRoutes(): void {
     this.app.use("/medic", MedicRouter);
-    this.app.use("/user", UserRouter);
+    this.app.use("/user", AuthenticationMiddleware.canActive, UserRouter);
+    this.app.get("/invalidate-cache", RedisBootstrap.clearCache);
   }
 
   mountHandlerErrors(): void {

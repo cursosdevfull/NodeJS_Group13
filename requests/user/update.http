@@ -1,0 +1,6 @@
+put http://localhost:3000/user/6111c496-b9d0-4270-b188-5d53a9d2e6d6 HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Sergio"
+}

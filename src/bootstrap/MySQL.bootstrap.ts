@@ -1,26 +1,13 @@
 import { DataSource } from "typeorm";
 
+import { Parameters } from "../core/helpers/parameters";
 import { Bootstrap } from "./bootstrap";
 
 export default class DatabaseBootstrap implements Bootstrap {
   private static appDataSource: DataSource;
 
   initialize(): Promise<boolean | DataSource> {
-    const dbConfig = {
-      host: process.env.DB_HOST || "localhost",
-      port: Number(process.env.DB_PORT) || 3306,
-      entities: [
-        process.env.DB_ENTITIES || "src/**/infrastructure/**/*.entity.ts",
-      ],
-      username: process.env.DB_USERNAME || "user",
-      password: process.env.DB_PASSWORD || "12345",
-      database: process.env.DB_NAME || "course_nodejs",
-      synchronize: process.env.DB_SYNCHRONIZE === "false" ? false : true,
-      logging: process.env.DB_LOGGING === "false" ? false : true,
-      poolSize: Number(process.env.DB_POOL_SIZE) || 10,
-      maxQueryExecutionTime:
-        Number(process.env.DB_MAX_QUERY_EXECUTION_TIME) || 10000,
-    };
+    const dbConfig = Parameters.MYSQL_CONFIG;
 
     console.log({ type: "mysql", ...dbConfig });
 

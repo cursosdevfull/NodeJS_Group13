@@ -2,7 +2,7 @@ import { plainToInstance } from "class-transformer";
 import { RoleEntity } from "src/modules/role/infrastructure/persistence/entities/role.entity";
 
 import { UserCreatedResponse } from "../../application/responses/user-created.response";
-import { User } from "../../domain/roots/user";
+import { User, UserProperties } from "../../domain/roots/user";
 import { UserEntity } from "../persistence/entities/user.entity";
 
 export class UserModelDto {
@@ -40,5 +40,24 @@ export class UserModelDto {
         excludeExtraneousValues: true,
       });
     }
+  }
+
+  static fromDataToDomain(userEntity: UserEntity): User {
+    const properties: UserProperties = {
+      id: userEntity.id,
+      name: userEntity.name,
+      lastname: userEntity.lastname,
+      email: userEntity.email,
+      password: userEntity.password,
+      photo: userEntity.photo,
+      isActive: userEntity.isActive,
+      refreshToken: userEntity.refreshToken,
+      createdAt: userEntity.createdAt,
+      updatedAt: userEntity.updatedAt,
+      deletedAt: userEntity.deletedAt,
+      roles: userEntity.roles,
+    };
+
+    return User.reconstitute(properties);
   }
 }

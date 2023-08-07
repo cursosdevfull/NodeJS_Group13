@@ -14,6 +14,10 @@ export class UserApplication {
     return await this.userRepository.getAll();
   }
 
+  async getById(id: string) {
+    return await this.userRepository.getById(id);
+  }
+
   async create(user: User) {
     let rolesUser;
     const rolesGetByIdsResult = await this.roleRepository.getByIds(
@@ -35,5 +39,17 @@ export class UserApplication {
     const userHash = User.reconstitute(userProperties);
 
     return await this.userRepository.save(userHash);
+  }
+
+  async remove(user: User) {
+    return await this.userRepository.save(user);
+  }
+
+  async update(user: User) {
+    return await this.userRepository.save(user);
+  }
+
+  async getByPage(page: number, pageSize: number) {
+    return await this.userRepository.getByPage(page, pageSize);
   }
 }

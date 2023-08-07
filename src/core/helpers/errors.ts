@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 
 import { IError } from "../error/error.interface";
+import { Parameters } from "./parameters";
 
 export class HandlerErrors {
   static notFound(req: Request, res: Response, next: NextFunction) {
@@ -23,7 +24,7 @@ export class HandlerErrors {
       message: error.message || "Internal Server Error",
     };
 
-    if (process.env.NODE_ENV !== "production") {
+    if (Parameters.ENVIRONMENT !== "production") {
       messageError["stack"] = error.stack;
     }
 
