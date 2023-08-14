@@ -54,4 +54,15 @@ export class Parameters {
         Number(process.env.DB_MAX_QUERY_EXECUTION_TIME) || 10000,
     };
   }
+
+  static get TOKEN_EXPIRES_TIME() {
+    return Number(process.env.TIME_EXPIRES_TIME) || 1;
+  }
+
+  static get TOKEN_SECRET_KEY() {
+    return (
+      process.env.TOKEN_SECRET_KEY ||
+      "N0oJ03xd47xU2Tyj6I4iEhY7AnIK4J^nmb&ZKpNC2bX9%8F"
+    );
+  }
 }

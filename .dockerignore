@@ -1,0 +1,8 @@
+node_modules
+cache
+dist
+data-mysql
+logs
+MyProject
+requests
+test

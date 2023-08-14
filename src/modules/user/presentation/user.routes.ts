@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { AuthorizationMiddleware } from "src/core/presentation/middlewares/authorization";
 
 import { AuthenticationMiddleware } from "../../../core/presentation/middlewares/authentication";
+import { AuthorizationMiddleware } from "../../../core/presentation/middlewares/authorization";
 import { CacheMiddleware } from "../../../core/presentation/middlewares/cache";
 import {
   Upload,
@@ -56,7 +56,7 @@ class UserRoutes {
     this.router.get(
       "/",
       AuthenticationMiddleware.canActive,
-      AuthorizationMiddleware.canActive("ADMIN", "MEDIC", "OPERATOR"),
+      AuthorizationMiddleware.canActive("ADMIN", "MEDIC2", "OPERATOR2"),
       CacheMiddleware.build("user"),
       userController.getAll.bind(userController)
     );

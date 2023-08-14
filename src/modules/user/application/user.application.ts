@@ -1,5 +1,4 @@
-import bcrypt from "bcryptjs";
-
+import { Crypt } from "../../../core/helpers/crypt";
 import { RoleRepository } from "../../role/domain/repositories/role.repository";
 import { UserRepository } from "../domain/repositories/user.repository";
 import { User, UserProperties } from "../domain/roots/user";
@@ -18,6 +17,10 @@ export class UserApplication {
     return await this.userRepository.getById(id);
   }
 
+  async getByEmail(email: string) {
+    return await this.userRepository.getByEmail(email);
+  }
+
   async create(user: User) {
     let rolesUser;
     const rolesGetByIdsResult = await this.roleRepository.getByIds(
@@ -29,7 +32,7 @@ export class UserApplication {
       rolesUser = rolesGetByIdsResult.value;
     }
 
-    const passwordHashed = await bcrypt.hash(user.properties().password, 10);
+    const passwordHashed = await Crypt.hash(user.properties().password);
     const userProperties: UserProperties = {
       ...user.properties(),
       password: passwordHashed,

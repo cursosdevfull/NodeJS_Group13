@@ -4,7 +4,7 @@ import helmet from "helmet";
 
 import RedisBootstrap from "./bootstrap/Redis.bootstrap";
 import { HandlerErrors } from "./core/helpers/errors";
-import { AuthenticationMiddleware } from "./core/presentation/middlewares/authentication";
+import AuthRouter from "./modules/auth/presentation/auth.routes";
 import MedicRouter from "./modules/medic/presentation/medic.routes";
 import UserRouter from "./modules/user/presentation/user.routes";
 
@@ -46,7 +46,8 @@ class App {
 
   mountRoutes(): void {
     this.app.use("/medic", MedicRouter);
-    this.app.use("/user", AuthenticationMiddleware.canActive, UserRouter);
+    this.app.use("/user", UserRouter);
+    this.app.use("/auth", AuthRouter);
     this.app.get("/invalidate-cache", RedisBootstrap.clearCache);
   }
 

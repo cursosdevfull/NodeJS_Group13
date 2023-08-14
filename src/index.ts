@@ -1,3 +1,4 @@
+import dotenv from "dotenv";
 import { DataSource } from "typeorm";
 
 import app from "./app";
@@ -10,6 +11,8 @@ import logger from "./core/helpers/logger";
 const server: Bootstrap = new ServerBootstrap(app);
 const mysql: Bootstrap = new MySQLBootstrap();
 const redis: Bootstrap = new RedisBootstrap();
+
+dotenv.config();
 
 (async () => {
   try {
