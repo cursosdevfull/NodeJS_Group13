@@ -19,8 +19,8 @@ dotenv.config({ path: 'env.txt' });
     logger.log('info', 'Starting server...');
     const promises: Array<Promise<boolean | Error | DataSource>> = [
       server.initialize(),
-      mysql.initialize(),
       redis.initialize(),
+      mysql.initialize(),
     ];
     await Promise.all(promises);
     logger.info('MySQL connected');
