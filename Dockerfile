@@ -1,5 +1,5 @@
-#FROM node:alpine3.17 as build
-FROM public.ecr.aws/b7h8q0t5/nodejsv16 as build
+FROM node:alpine3.17 as build
+#FROM public.ecr.aws/b7h8q0t5/nodejsv16 as build
 
 WORKDIR /build
 
@@ -11,8 +11,8 @@ COPY . .
 
 RUN npm run build
 
-#FROM node:alpine3.17
-FROM public.ecr.aws/b7h8q0t5/nodejsv16 
+FROM node:alpine3.17
+#FROM public.ecr.aws/b7h8q0t5/nodejsv16 
 
 WORKDIR /app
 
