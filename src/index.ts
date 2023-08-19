@@ -12,7 +12,7 @@ const server: Bootstrap = new ServerBootstrap(app);
 const mysql: Bootstrap = new MySQLBootstrap();
 const redis: Bootstrap = new RedisBootstrap();
 
-dotenv.config();
+dotenv.config({ path: "env.txt" });
 
 (async () => {
   try {
