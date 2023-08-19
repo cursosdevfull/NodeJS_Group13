@@ -3,7 +3,9 @@
   "Image": {
     "Name": "282865065290.dkr.ecr.us-east-1.amazonaws.com/cursonodejs13:latest"
   },
-  "Ports": {
-    "ContainerPort": "3000"
-  }
+  "Ports": [
+    {
+      "ContainerPort": "3000"
+    }
+  ]
 }
