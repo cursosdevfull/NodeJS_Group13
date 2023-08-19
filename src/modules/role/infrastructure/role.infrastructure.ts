@@ -1,9 +1,9 @@
-import { err, ok, Result } from "neverthrow";
-import { In } from "typeorm";
+import { err, ok, Result } from 'neverthrow';
+import { In } from 'typeorm';
 
-import MySQLBootstrap from "../../../bootstrap/MySQL.bootstrap";
-import { DatabaseException } from "../../../core/exceptions/database.exception";
-import { RoleEntity } from "./persistence/entities/role.entity";
+import MySQLBootstrap from '../../../bootstrap/MySQL.bootstrap';
+import { DatabaseException } from '../../../core/exceptions/database.exception';
+import { RoleEntity } from './persistence/entities/role.entity';
 
 export type GetRolesByIdsResult = Result<RoleEntity[], DatabaseException>;
 

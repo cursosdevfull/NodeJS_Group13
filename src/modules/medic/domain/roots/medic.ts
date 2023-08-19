@@ -1,9 +1,9 @@
-import { Address } from "../entities/address";
-import { Disease } from "../entities/disease";
-import { Specialty } from "../entities/specialty";
-import { MedicFactory } from "./medic.factory";
+import { Address } from '../entities/address';
+import { Disease } from '../entities/disease';
+import { Specialty } from '../entities/specialty';
+import { MedicFactory } from './medic.factory';
 
-export type GENDER = "M" | "F";
+export type GENDER = 'M' | 'F';
 
 export interface MedicEssentials {
   readonly id: string;
@@ -29,8 +29,8 @@ export interface MedicOptionals {
 }
 
 export type MedicUpdate = Partial<
-  Omit<MedicEssentials, "id" | "email"> &
-    Omit<MedicOptionals, "createdAt" | "deletedAt" | "updatedAt" | "active">
+  Omit<MedicEssentials, 'id' | 'email'> &
+    Omit<MedicOptionals, 'createdAt' | 'deletedAt' | 'updatedAt' | 'active'>
 >;
 
 export type MedicProperties = MedicEssentials & Partial<MedicOptionals>;
@@ -92,7 +92,7 @@ export class Medic {
         createdAt: this.createdAt,
         updatedAt: this.updatedAt,
         deletedAt: this.deletedAt,
-      }
+      },
     );
   }
 

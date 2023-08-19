@@ -1,7 +1,7 @@
-import { err, ok, Result } from "neverthrow";
-import { validate } from "uuid";
+import { err, ok, Result } from 'neverthrow';
+import { validate } from 'uuid';
 
-import { UUIDException } from "../exceptions/uuid.exception";
+import { UUIDException } from '../exceptions/uuid.exception';
 
 export class UuidVO {
   private readonly value: string;
@@ -13,9 +13,8 @@ export class UuidVO {
   static create(value: string): Result<UuidVO, UUIDException> {
     if (!validate(value)) {
       return err(new UUIDException());
-    } else {
-      return ok(new UuidVO(value));
     }
+    return ok(new UuidVO(value));
   }
 
   getValue(): string {

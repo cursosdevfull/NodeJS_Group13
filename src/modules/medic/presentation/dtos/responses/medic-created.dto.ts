@@ -1,23 +1,23 @@
-import { Exclude, Expose, plainToInstance, Type } from "class-transformer";
-import { v4 as uuidv4 } from "uuid";
+import { Exclude, Expose, plainToInstance, Type } from 'class-transformer';
+import { v4 as uuidv4 } from 'uuid';
 
-import { Address } from "../../../domain/entities/address";
-import { Disease } from "../../../domain/entities/disease";
-import { Specialty } from "../../../domain/entities/specialty";
-import { GENDER, Medic } from "../../../domain/roots/medic";
+import { Address } from '../../../domain/entities/address';
+import { Disease } from '../../../domain/entities/disease';
+import { Specialty } from '../../../domain/entities/specialty';
+import { GENDER, Medic } from '../../../domain/roots/medic';
 
 export class MedicCreatedDto {
-  @Expose({ name: "id" })
+  @Expose({ name: 'id' })
   medicId: string;
 
-  @Expose({ name: "name" })
+  @Expose({ name: 'name' })
   nombre: string;
 
   lastname: string;
   cmp: string;
   specialty: Specialty;
 
-  @Expose({ groups: ["admin"] })
+  @Expose({ groups: ['admin'] })
   email: string;
 
   @Exclude()
@@ -71,7 +71,7 @@ export class MedicCreateResponse {
     return plainToInstance(
       StandardResponse,
       { result: properties },
-      { groups: ["admin"] }
+      { groups: ['admin'] },
     );
   }
 }

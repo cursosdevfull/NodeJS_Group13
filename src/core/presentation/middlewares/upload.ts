@@ -1,7 +1,7 @@
-import { S3Client } from "@aws-sdk/client-s3";
-import { Request } from "express";
-import multer from "multer";
-import multer_s3 from "multer-s3";
+import { S3Client } from '@aws-sdk/client-s3';
+import { Request } from 'express';
+import multer from 'multer';
+import multer_s3 from 'multer-s3';
 
 export class UploadBuilder {
   private _fieldName: string;
@@ -82,8 +82,8 @@ export class Upload {
       limits: { fileSize: options.maxSize },
       storage: multer_s3({
         s3: new S3Client({}),
-        bucket: "curso-nodejs13",
-        acl: options.isPublic ? "public-read" : "private",
+        bucket: 'curso-nodejs13',
+        acl: options.isPublic ? 'public-read' : 'private',
         metadata(req, file, cb) {
           cb(null, { fieldName: file.fieldname });
         },
@@ -91,10 +91,10 @@ export class Upload {
           const mimeType = file.mimetype;
           const isFileAllowed = options.allowedMimeTypes.includes(mimeType);
           if (!isFileAllowed) {
-            cb(new Error("File type not allowed"));
+            cb(new Error('File type not allowed'));
           }
 
-          const partsFileName = file.originalname.split(".");
+          const partsFileName = file.originalname.split('.');
           const extension = partsFileName[partsFileName.length - 1];
           const fileName = `${options.destination}/${Date.now()}.${extension}`;
           req.body[options.fieldName] = fileName;

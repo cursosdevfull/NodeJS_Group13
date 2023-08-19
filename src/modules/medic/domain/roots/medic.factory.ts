@@ -1,16 +1,16 @@
-import { err, ok, Result } from "neverthrow";
+import { err, ok, Result } from 'neverthrow';
 
 import {
   MedicAddressEmptyException,
   MedicAddressMaximumException,
-} from "../exceptions/address.exception";
-import { MedicAgeException } from "../exceptions/age.exception";
-import { MedicCMPException } from "../exceptions/cmp.exception";
-import { MedicDNIException } from "../exceptions/dni.exception";
-import { MedicPhoneException } from "../exceptions/phone.exception";
-import { UUIDException } from "../exceptions/uuid.exception";
-import { UuidVO } from "../value-object/uuid.vo";
-import { Medic, MedicProperties } from "./medic";
+} from '../exceptions/address.exception';
+import { MedicAgeException } from '../exceptions/age.exception';
+import { MedicCMPException } from '../exceptions/cmp.exception';
+import { MedicDNIException } from '../exceptions/dni.exception';
+import { MedicPhoneException } from '../exceptions/phone.exception';
+import { UUIDException } from '../exceptions/uuid.exception';
+import { UuidVO } from '../value-object/uuid.vo';
+import { Medic, MedicProperties } from './medic';
 
 export type MedicFactoryResult = Result<
   Medic,
@@ -38,22 +38,22 @@ export class MedicFactory {
     if (props.dni.length !== 8) return err(new MedicDNIException());
 
     if (props.phone.length !== 9)
-      return err(new MedicPhoneException("El teléfono debe tener 9 dígitos"));
+      return err(new MedicPhoneException('El teléfono debe tener 9 dígitos'));
 
     if (props.cmp.length !== 5)
-      return err(new MedicCMPException("El CMP debe tener 5 dígitos"));
+      return err(new MedicCMPException('El CMP debe tener 5 dígitos'));
 
     if (props.address.length === 0)
       return err(
         new MedicAddressEmptyException(
-          "El médico debe tener al menos una dirección"
-        )
+          'El médico debe tener al menos una dirección',
+        ),
       );
     if (props.address.length > 3)
       return err(
         new MedicAddressMaximumException(
-          "El médico no puede tener más de 3 direcciones"
-        )
+          'El médico no puede tener más de 3 direcciones',
+        ),
       );
 
     return ok(new Medic(props));

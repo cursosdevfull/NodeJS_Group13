@@ -1,4 +1,4 @@
-import { Type } from "class-transformer";
+import { Type } from 'class-transformer';
 import {
   ArrayMaxSize,
   ArrayMinSize,
@@ -14,12 +14,12 @@ import {
   Min,
   MinLength,
   ValidateNested,
-} from "class-validator";
+} from 'class-validator';
 
-import { Disease } from "../../../../../modules/medic/domain/entities/disease";
-import { Address } from "../../../domain/entities/address";
-import { Specialty } from "../../../domain/entities/specialty";
-import { GENDER } from "../../../domain/roots/medic";
+import { Disease } from '../../../../../modules/medic/domain/entities/disease';
+import { Address } from '../../../domain/entities/address';
+import { Specialty } from '../../../domain/entities/specialty';
+import { GENDER } from '../../../domain/roots/medic';
 
 export class MedicCreateDto {
   @IsNotEmpty()
@@ -44,7 +44,7 @@ export class MedicCreateDto {
 
   @IsNotEmpty()
   @IsString()
-  @IsEmail({}, { message: "El correo no es válido" })
+  @IsEmail({}, { message: 'El correo no es válido' })
   email: string;
 
   @IsNotEmpty()

@@ -1,9 +1,9 @@
-import { NextFunction, Request, Response } from "express";
+import { NextFunction, Request, Response } from 'express';
 
-import RedisBootstrap from "../../../bootstrap/Redis.bootstrap";
-import { UserApplication } from "../application/user.application";
-import { UserProperties } from "../domain/roots/user";
-import { UserFactory } from "../domain/roots/user.factory";
+import RedisBootstrap from '../../../bootstrap/Redis.bootstrap';
+import { UserApplication } from '../application/user.application';
+import { UserProperties } from '../domain/roots/user';
+import { UserFactory } from '../domain/roots/user.factory';
 
 export class UserController {
   constructor(private readonly application: UserApplication) {}

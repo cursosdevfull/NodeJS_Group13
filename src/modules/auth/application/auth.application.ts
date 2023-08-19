@@ -1,7 +1,7 @@
-import { UserApplication } from "src/modules/user/application/user.application";
+import { UserApplication } from 'src/modules/user/application/user.application';
 
-import { Crypt } from "../../../core/helpers/crypt";
-import { User } from "../../user/domain/roots/user";
+import { Crypt } from '../../../core/helpers/crypt';
+import { User } from '../../user/domain/roots/user';
 
 export class AuthApplication {
   constructor(private readonly application: UserApplication) {}
@@ -13,7 +13,7 @@ export class AuthApplication {
 
     const userMatch = await Crypt.compare(
       password,
-      userFoundResult.value.properties().password
+      userFoundResult.value.properties().password,
     );
 
     if (!userMatch) return null;

@@ -1,4 +1,4 @@
-import { UserFactory } from "./user.factory";
+import { UserFactory } from './user.factory';
 
 export interface UserRequired {
   readonly name: string;
@@ -21,7 +21,7 @@ export interface UserOptional {
 export type UserProperties = UserRequired & Partial<UserOptional>;
 
 export type UserPropertiesUpdate = Partial<
-  Omit<UserRequired, "email"> & Pick<UserOptional, "photo">
+  Omit<UserRequired, 'email'> & Pick<UserOptional, 'photo'>
 >;
 
 export class User {
@@ -72,7 +72,7 @@ export class User {
 
   update(fields: UserPropertiesUpdate) {
     const fieldsFiltered = Object.fromEntries(
-      Object.entries(fields).filter(([_, v]) => v != null)
+      Object.entries(fields).filter(([_, v]) => v !== null),
     );
     Object.assign(this, fieldsFiltered);
     this.updatedAt = new Date();

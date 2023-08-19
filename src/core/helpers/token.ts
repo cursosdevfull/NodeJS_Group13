@@ -1,9 +1,9 @@
-import { addMinutes } from "date-fns";
-import jwt from "jwt-simple";
+import { addMinutes } from 'date-fns';
+import jwt from 'jwt-simple';
 
-import { User } from "../../modules/user/domain/roots/user";
-import { IError } from "../error/error.interface";
-import { Parameters } from "./parameters";
+import { User } from '../../modules/user/domain/roots/user';
+import { IError } from '../error/error.interface';
+import { Parameters } from './parameters';
 
 export class Token {
   static generateAccessToken(user: User): string {
@@ -28,7 +28,7 @@ export class Token {
       try {
         const payload = jwt.decode(accessToken, Parameters.TOKEN_SECRET_KEY);
         if (payload.exp < Date.now()) {
-          const err: IError = new Error("Token expired");
+          const err: IError = new Error('Token expired');
           err.status = 403;
           reject(err);
         } else {
@@ -36,7 +36,7 @@ export class Token {
         }
       } catch (error) {
         console.log(error);
-        const err: IError = new Error("Token invalid");
+        const err: IError = new Error('Token invalid');
         err.status = 401;
         reject(err);
       }

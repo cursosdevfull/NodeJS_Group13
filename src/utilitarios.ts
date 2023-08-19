@@ -1,4 +1,4 @@
-const className = "Utilitarios";
+const className = 'Utilitarios';
 
 export default className;
 

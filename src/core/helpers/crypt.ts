@@ -1,4 +1,4 @@
-import bcrypt from "bcryptjs";
+import bcrypt from 'bcryptjs';
 
 export class Crypt {
   static async hash(text: string): Promise<string> {
@@ -7,7 +7,7 @@ export class Crypt {
 
   static async compare(
     textOriginal: string,
-    textHashed: string
+    textHashed: string,
   ): Promise<boolean> {
     return await bcrypt.compare(textOriginal, textHashed);
   }

@@ -1,7 +1,7 @@
 import {
   ExceptionBase,
   ExceptionCode,
-} from "../../../../core/exceptions/exception-base";
+} from '../../../../core/exceptions/exception-base';
 
 export class MedicAddressEmptyException extends ExceptionBase {
   constructor(message: string) {

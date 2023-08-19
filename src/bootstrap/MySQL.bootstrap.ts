@@ -1,7 +1,7 @@
-import { DataSource } from "typeorm";
+import { DataSource } from 'typeorm';
 
-import { Parameters } from "../core/helpers/parameters";
-import { Bootstrap } from "./bootstrap";
+import { Parameters } from '../core/helpers/parameters';
+import { Bootstrap } from './bootstrap';
 
 export default class DatabaseBootstrap implements Bootstrap {
   private static appDataSource: DataSource;
@@ -9,9 +9,9 @@ export default class DatabaseBootstrap implements Bootstrap {
   initialize(): Promise<boolean | DataSource> {
     const dbConfig = Parameters.MYSQL_CONFIG;
 
-    console.log({ type: "mysql", ...dbConfig });
+    console.log({ type: 'mysql', ...dbConfig });
 
-    const AppDataSource = new DataSource({ type: "mysql", ...dbConfig });
+    const AppDataSource = new DataSource({ type: 'mysql', ...dbConfig });
 
     DatabaseBootstrap.appDataSource = AppDataSource;
 

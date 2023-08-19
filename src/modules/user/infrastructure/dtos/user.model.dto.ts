@@ -1,9 +1,9 @@
-import { plainToInstance } from "class-transformer";
-import { RoleEntity } from "src/modules/role/infrastructure/persistence/entities/role.entity";
+import { plainToInstance } from 'class-transformer';
+import { RoleEntity } from 'src/modules/role/infrastructure/persistence/entities/role.entity';
 
-import { UserCreatedResponse } from "../../application/responses/user-created.response";
-import { User, UserProperties } from "../../domain/roots/user";
-import { UserEntity } from "../persistence/entities/user.entity";
+import { UserCreatedResponse } from '../../application/responses/user-created.response';
+import { User, UserProperties } from '../../domain/roots/user';
+import { UserEntity } from '../persistence/entities/user.entity';
 
 export class UserModelDto {
   static fromDomainToData(user: User): UserEntity {
@@ -27,7 +27,7 @@ export class UserModelDto {
   }
 
   static fromDataToResponse(
-    userEntity: UserEntity | UserEntity[]
+    userEntity: UserEntity | UserEntity[],
   ): UserCreatedResponse | UserCreatedResponse[] {
     if (Array.isArray(userEntity)) {
       return userEntity.map((user) => {
@@ -35,11 +35,10 @@ export class UserModelDto {
           excludeExtraneousValues: true,
         });
       });
-    } else {
-      return plainToInstance(UserCreatedResponse, userEntity, {
-        excludeExtraneousValues: true,
-      });
     }
+    return plainToInstance(UserCreatedResponse, userEntity, {
+      excludeExtraneousValues: true,
+    });
   }
 
   static fromDataToDomain(userEntity: UserEntity): User {

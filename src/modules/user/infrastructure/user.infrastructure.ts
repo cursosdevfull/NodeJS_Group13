@@ -1,14 +1,14 @@
-import { err, ok, Result } from "neverthrow";
-import { In } from "typeorm";
+import { err, ok, Result } from 'neverthrow';
+import { In } from 'typeorm';
 
-import MySQLBootstrap from "../../../bootstrap/MySQL.bootstrap";
-import { DatabaseException } from "../../../core/exceptions/database.exception";
-import { RoleEntity } from "../../role/infrastructure/persistence/entities/role.entity";
-import { UserCreatedResponse } from "../application/responses/user-created.response";
-import { UserRepository } from "../domain/repositories/user.repository";
-import { User } from "../domain/roots/user";
-import { UserModelDto } from "./dtos/user.model.dto";
-import { UserEntity } from "./persistence/entities/user.entity";
+import MySQLBootstrap from '../../../bootstrap/MySQL.bootstrap';
+import { DatabaseException } from '../../../core/exceptions/database.exception';
+import { RoleEntity } from '../../role/infrastructure/persistence/entities/role.entity';
+import { UserCreatedResponse } from '../application/responses/user-created.response';
+import { UserRepository } from '../domain/repositories/user.repository';
+import { User } from '../domain/roots/user';
+import { UserModelDto } from './dtos/user.model.dto';
+import { UserEntity } from './persistence/entities/user.entity';
 
 export type UserResult = Result<
   UserCreatedResponse | UserCreatedResponse[],
@@ -25,7 +25,7 @@ export type UserGetByPageResult = Result<
 export class UserInfrastructure implements UserRepository {
   async getByPage(
     page: number,
-    pageSize: number
+    pageSize: number,
   ): Promise<UserGetByPageResult> {
     try {
       const userRepository =
@@ -34,11 +34,11 @@ export class UserInfrastructure implements UserRepository {
         where: { isActive: true },
         skip: page * pageSize,
         take: pageSize,
-        relations: ["roles"],
+        relations: ['roles'],
       });
 
       const entities = UserModelDto.fromDataToResponse(
-        userEntities
+        userEntities,
       ) as UserCreatedResponse[];
       return ok([entities, total]);
     } catch (error) {}
@@ -59,8 +59,6 @@ export class UserInfrastructure implements UserRepository {
   }
   async save(user: User): Promise<UserResult> {
     try {
-      const roles = user.properties().roles;
-
       const roleRepository =
         MySQLBootstrap.dataSource.getRepository(RoleEntity);
       const rolesUser = await roleRepository.findBy({
@@ -88,7 +86,7 @@ export class UserInfrastructure implements UserRepository {
 
       const userEntity = await userRepository.findOne({
         where: { id, isActive: true },
-        relations: ["roles"],
+        relations: ['roles'],
       });
 
       return ok(UserModelDto.fromDataToDomain(userEntity));
@@ -104,7 +102,7 @@ export class UserInfrastructure implements UserRepository {
 
       const userEntity = await userRepository.findOne({
         where: { email, isActive: true },
-        relations: ["roles"],
+        relations: ['roles'],
       });
 
       return ok(UserModelDto.fromDataToDomain(userEntity));

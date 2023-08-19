@@ -1,8 +1,8 @@
-import { NextFunction, Request, Response } from "express";
-import { IError } from "src/core/error/error.interface";
+import { NextFunction, Request, Response } from 'express';
+import { IError } from 'src/core/error/error.interface';
 
-import { Token } from "../../../core/helpers/token";
-import { AuthApplication } from "../application/auth.application";
+import { Token } from '../../../core/helpers/token';
+import { AuthApplication } from '../application/auth.application';
 
 export class AuthController {
   constructor(private readonly application: AuthApplication) {}
@@ -12,11 +12,11 @@ export class AuthController {
 
     const userMatchResult = await this.application.existingUser(
       email,
-      password
+      password,
     );
 
     if (!userMatchResult) {
-      const err: IError = new Error("User not found");
+      const err: IError = new Error('User not found');
       err.status = 404;
       return next(err);
     }

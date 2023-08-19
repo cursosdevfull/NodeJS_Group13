@@ -1,12 +1,12 @@
-import { Crypt } from "../../../core/helpers/crypt";
-import { RoleRepository } from "../../role/domain/repositories/role.repository";
-import { UserRepository } from "../domain/repositories/user.repository";
-import { User, UserProperties } from "../domain/roots/user";
+import { Crypt } from '../../../core/helpers/crypt';
+import { RoleRepository } from '../../role/domain/repositories/role.repository';
+import { UserRepository } from '../domain/repositories/user.repository';
+import { User, UserProperties } from '../domain/roots/user';
 
 export class UserApplication {
   constructor(
     private readonly userRepository: UserRepository,
-    private readonly roleRepository: RoleRepository
+    private readonly roleRepository: RoleRepository,
   ) {}
 
   async getAll() {
@@ -24,7 +24,7 @@ export class UserApplication {
   async create(user: User) {
     let rolesUser;
     const rolesGetByIdsResult = await this.roleRepository.getByIds(
-      user.properties().roles as number[]
+      user.properties().roles as number[],
     );
 
     if (rolesGetByIdsResult.isErr()) {

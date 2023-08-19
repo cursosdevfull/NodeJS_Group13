@@ -1,12 +1,12 @@
-import cors from "cors";
-import express, { Application } from "express";
-import helmet from "helmet";
+import cors from 'cors';
+import express, { Application } from 'express';
+import helmet from 'helmet';
 
-import RedisBootstrap from "./bootstrap/Redis.bootstrap";
-import { HandlerErrors } from "./core/helpers/errors";
-import AuthRouter from "./modules/auth/presentation/auth.routes";
-import MedicRouter from "./modules/medic/presentation/medic.routes";
-import UserRouter from "./modules/user/presentation/user.routes";
+import RedisBootstrap from './bootstrap/Redis.bootstrap';
+import { HandlerErrors } from './core/helpers/errors';
+import AuthRouter from './modules/auth/presentation/auth.routes';
+import MedicRouter from './modules/medic/presentation/medic.routes';
+import UserRouter from './modules/user/presentation/user.routes';
 
 class App {
   private readonly app: Application;
@@ -20,20 +20,20 @@ class App {
   }
 
   mountHealthCheck(): void {
-    this.app.get("/", (req, res) => {
-      res.send("ok");
+    this.app.get('/', (req, res) => {
+      res.send('ok');
     });
 
-    this.app.get("/health", (req, res) => {
-      res.send("ok");
+    this.app.get('/health', (req, res) => {
+      res.send('ok');
     });
 
-    this.app.get("/healthz", (req, res) => {
-      res.send("ok");
+    this.app.get('/healthz', (req, res) => {
+      res.send('ok');
     });
 
-    this.app.get("/healthcheck", (req, res) => {
-      res.send("ok");
+    this.app.get('/healthcheck', (req, res) => {
+      res.send('ok');
     });
   }
 
@@ -45,10 +45,10 @@ class App {
   }
 
   mountRoutes(): void {
-    this.app.use("/medic", MedicRouter);
-    this.app.use("/user", UserRouter);
-    this.app.use("/auth", AuthRouter);
-    this.app.get("/invalidate-cache", RedisBootstrap.clearCache);
+    this.app.use('/medic', MedicRouter);
+    this.app.use('/user', UserRouter);
+    this.app.use('/auth', AuthRouter);
+    this.app.get('/invalidate-cache', RedisBootstrap.clearCache);
   }
 
   mountHandlerErrors(): void {

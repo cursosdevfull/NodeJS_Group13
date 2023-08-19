@@ -1,6 +1,6 @@
-import { NextFunction, Request, Response } from "express";
+import { NextFunction, Request, Response } from 'express';
 
-import { IError } from "../../error/error.interface";
+import { IError } from '../../error/error.interface';
 
 export class AuthorizationMiddleware {
   static canActive(...rolesAllowed: string[]) {
@@ -14,8 +14,8 @@ export class AuthorizationMiddleware {
       }
 
       const error: IError = new Error();
-      error.message = "Access forbidden";
-      error.stack = "Access forbidden";
+      error.message = 'Access forbidden';
+      error.stack = 'Access forbidden';
       error.status = 409;
 
       return next(error);
