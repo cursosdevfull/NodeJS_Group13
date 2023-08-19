@@ -1,0 +1,1 @@
+$ 2tsX>hr/src/modules/medic/domain/roots/medic.factory.ts

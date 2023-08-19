@@ -1,0 +1,1 @@
+' 2tsX5hr4src/modules/medic/infrastructure/dtos/get-all.dto.ts

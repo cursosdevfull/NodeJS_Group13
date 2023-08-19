@@ -1,0 +1,1 @@
+/ 2tsXhrCsrc/modules/role/infrastructure/persistence/entities/role.entity.ts

@@ -1,0 +1,1 @@
+: 2tsX,hrCsrc/modules/user/infrastructure/persistence/entities/user.entity.ts

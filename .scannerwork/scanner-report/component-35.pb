@@ -1,0 +1,1 @@
+# 2tsXhr9src/modules/medic/domain/repositories/medic.repository.ts

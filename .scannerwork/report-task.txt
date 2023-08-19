@@ -1,0 +1,6 @@
+projectKey=Apx:cursonodejs13
+serverUrl=http://localhost:9000
+serverVersion=8.9.10.61524
+dashboardUrl=http://localhost:9000/dashboard?id=Apx%3Acursonodejs13
+ceTaskId=AYoPC8e2Ye7xFand7Zse
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AYoPC8e2Ye7xFand7Zse

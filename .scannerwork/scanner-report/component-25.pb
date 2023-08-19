@@ -1,0 +1,1 @@
+ 2tsXhr2src/modules/medic/application/medic.application.ts

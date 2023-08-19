@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testExecutions version="1">
+  <file path="D:\Cursos\NodeJS_Group13\test\units\user.controller.spec.ts">
+    <testCase name="UserController getAll should return 200 and a list of users" duration="4"/>
+    <testCase name="UserController insert should return 201 and a user" duration="5"/>
+  </file>
+</testExecutions>

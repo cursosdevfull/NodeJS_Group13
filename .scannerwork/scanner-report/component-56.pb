@@ -1,0 +1,1 @@
+8 2tsXQhr%src/modules/user/domain/roots/user.ts

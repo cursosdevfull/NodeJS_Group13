@@ -1,0 +1,1 @@
+* 2tsXNhrBsrc/modules/medic/presentation/dtos/responses/medic-created.dto.ts
