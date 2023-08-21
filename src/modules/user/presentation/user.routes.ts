@@ -47,8 +47,6 @@ class UserRoutes {
 
     this.router.post(
       '/',
-      AuthenticationMiddleware.canActive,
-      AuthorizationMiddleware.canActive('ADMIN', 'MEDIC'),
       Upload.save(uploadOptions),
       Validator.execute({ body: new UserCreateDto() }),
       userController.insert.bind(userController),

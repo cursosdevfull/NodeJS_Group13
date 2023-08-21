@@ -68,10 +68,17 @@ export class UserInfrastructure implements UserRepository {
       const userRepository =
         MySQLBootstrap.dataSource.getRepository(UserEntity);
 
+      console.log('user', user);
+
       const userEntity = UserModelDto.fromDomainToData(user);
       userEntity.roles = rolesUser;
 
-      await userRepository.save(userEntity);
+      console.log('userEntity', userEntity);
+
+      console.log('userRepository', userRepository);
+      console.log('roleRepository', roleRepository);
+      const result = await userRepository.save(userEntity);
+      console.log('result', result);
 
       return ok(UserModelDto.fromDataToResponse(userEntity));
     } catch (error) {

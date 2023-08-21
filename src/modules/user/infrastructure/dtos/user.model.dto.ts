@@ -1,6 +1,6 @@
 import { plainToInstance } from 'class-transformer';
-import { RoleEntity } from 'src/modules/role/infrastructure/persistence/entities/role.entity';
 
+import { RoleEntity } from '../../../role/infrastructure/persistence/entities/role.entity';
 import { UserCreatedResponse } from '../../application/responses/user-created.response';
 import { User, UserProperties } from '../../domain/roots/user';
 import { UserEntity } from '../persistence/entities/user.entity';
@@ -21,7 +21,12 @@ export class UserModelDto {
     userEntity.createdAt = properties.createdAt;
     userEntity.updatedAt = properties.updatedAt;
     userEntity.deletedAt = properties.deletedAt;
-    userEntity.roles = properties.roles as RoleEntity[];
+    userEntity.roles = properties.roles.map((role: any) => {
+      const roleObj = new RoleEntity();
+      roleObj.id = role.id;
+      roleObj.name = role.name;
+      return roleObj;
+    });
 
     return userEntity;
   }
