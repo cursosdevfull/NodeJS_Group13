@@ -61,6 +61,25 @@ services:
     networks:
       - net-course
 
+  locust-master:
+    build:
+      context: .
+      dockerfile: locust/Dockerfile
+    container_name: locust-master
+    ports:
+      - '9000:8089'
+    command: '--host http://cursonodejs13-env.eba-uzkmmecg.us-east-1.elasticbeanstalk.com --master'
+    networks:
+      - net-course
+
+  locust-slave:
+    build:
+      context: .
+      dockerfile: locust/Dockerfile
+    command: '--host http://cursonodejs13-env.eba-uzkmmecg.us-east-1.elasticbeanstalk.com --master-host=locust-master --slave'
+    networks:
+      - net-course
+
 volumes:
   vol-course-mysql:
     name: vol-course-mysql

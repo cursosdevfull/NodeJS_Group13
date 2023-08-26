@@ -3,11 +3,7 @@ import { Router } from 'express';
 import { AuthenticationMiddleware } from '../../../core/presentation/middlewares/authentication';
 import { AuthorizationMiddleware } from '../../../core/presentation/middlewares/authorization';
 import { CacheMiddleware } from '../../../core/presentation/middlewares/cache';
-import {
-  Upload,
-  UploadBuilder,
-  UploadOptions,
-} from '../../../core/presentation/middlewares/upload';
+import { Upload, UploadBuilder, UploadOptions } from '../../../core/presentation/middlewares/upload';
 import { Validator } from '../../../core/presentation/middlewares/validator';
 import { RoleRepository } from '../../role/domain/repositories/role.repository';
 import { RoleInfrastructure } from '../../role/infrastructure/role.infrastructure';
@@ -54,7 +50,7 @@ class UserRoutes {
     this.router.get(
       '/',
       AuthenticationMiddleware.canActive,
-      AuthorizationMiddleware.canActive('ADMIN', 'MEDIC2', 'OPERATOR2'),
+      AuthorizationMiddleware.canActive('ADMIN', 'MEDIC', 'OPERATOR'),
       CacheMiddleware.build('user'),
       userController.getAll.bind(userController),
     );
